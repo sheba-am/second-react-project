@@ -45,7 +45,7 @@ class DishDetail  extends Component {
                     <p>
                     --{showCM.author}
                     &nbsp;
-                      {showCM.date}
+                      {new Intl.DateTimeFormat('en-US', { year: 'numeric', month: 'short', day: '2-digit'}).format(new Date(Date.parse(showCM.date)))}
                     </p>
                   </div>
 
