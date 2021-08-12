@@ -15,22 +15,31 @@ class Main extends Component {
     super(props);
     this.state = {
         dishes: DISHES,
-        selectDish: null
     };
   }
 
-  onDishSelect(dishId) {
-    this.setState({ selectDish: dishId});
-  }
+
 
 
   render() {
+
+    const HomePage = () => {
+      return(
+          <Home 
+          />
+      );
+    }
+
+
+
     return (
       <div>
         <Header />
-        <Menu dishes={this.state.dishes} onClick={(dishId) => this.onDishSelect(dishId)} />
-        <DishDetail 
-        selectdishes={this.state.dishes.filter((dish) => dish.id === this.state.selectDish)[0]} />
+          <Switch>
+                <Route path='/home' component={HomePage} />
+                <Route exact path='/menu' component={() => <Menu dishes={this.state.dishes} />} />
+                <Redirect to="/home" />
+            </Switch>
         <Footer />
 
       </div> // when you filter the array the answer is another array containing all of the objects which have equal conditions
