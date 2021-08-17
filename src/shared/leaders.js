@@ -2,7 +2,7 @@ export const LEADERS = [
     {
       id: 0,
       name: 'Peter Pan',
-      image: 'https://w7.pngwing.com/pngs/577/307/png-transparent-human-with-circle-logo-national-cyber-security-alliance-organization-drupal-association-information-internet-icon-s-customers-free-miscellaneous-company-logo-thumbnail.png',
+      image: 'https://image.flaticon.com/icons/png/128/63/63699.png',
       designation: 'Chief Epicurious Officer',
       abbr: 'CEO',
       featured: false,
@@ -11,7 +11,7 @@ export const LEADERS = [
     {
       id: 1,
       name: 'Dhanasekaran Witherspoon',
-      image: 'https://w7.pngwing.com/pngs/577/307/png-transparent-human-with-circle-logo-national-cyber-security-alliance-organization-drupal-association-information-internet-icon-s-customers-free-miscellaneous-company-logo-thumbnail.png',
+      image: 'https://image.flaticon.com/icons/png/128/63/63699.png',
       designation: 'Chief Food Officer',
       abbr: 'CFO',
         featured: false,
@@ -20,7 +20,7 @@ export const LEADERS = [
     {
       id: 2,
       name: 'Agumbe Tang',
-      image: 'https://w7.pngwing.com/pngs/577/307/png-transparent-human-with-circle-logo-national-cyber-security-alliance-organization-drupal-association-information-internet-icon-s-customers-free-miscellaneous-company-logo-thumbnail.png',
+      image: 'https://image.flaticon.com/icons/png/128/63/63699.png',
       designation: 'Chief Taste Officer',
       abbr: 'CTO',
         featured: false,
@@ -29,7 +29,7 @@ export const LEADERS = [
     {
       id: 3,
       name: 'Alberto Somayya',
-      image: 'https://w7.pngwing.com/pngs/577/307/png-transparent-human-with-circle-logo-national-cyber-security-alliance-organization-drupal-association-information-internet-icon-s-customers-free-miscellaneous-company-logo-thumbnail.png',
+      image: 'https://image.flaticon.com/icons/png/128/63/63699.png',
       designation: 'Executive Chef',
       abbr: 'EC',
       featured: true,
