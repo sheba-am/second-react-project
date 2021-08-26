@@ -4,16 +4,14 @@ import { Card, CardImg, CardText, CardBody,
   CardTitle, Breadcrumb, BreadcrumbItem, Col, Row } from 'reactstrap';
 import { Link } from 'react-router-dom';
 import { Component } from 'react';
-import {  Collapse, Jumbotron,
-  Button, Modal, ModalHeader, ModalBody,
-  Form, FormGroup, Input, Label } from 'reactstrap';
+import { Button, Modal, ModalHeader, ModalBody,
+ Label } from 'reactstrap';
 import { Control, LocalForm, Errors } from 'react-redux-form';
 
 const required = (val) => val && val.length;
 const maxLength = (len) => (val) => !(val) || (val.length <= len);
 const minLength = (len) => (val) => val && (val.length >= len);
 const isNumber = (val) => !isNaN(Number(val));
-const validEmail = (val) => /^[A-Z0-9._%+-]+@[A-Z0-9.-]+\.[A-Z]{2,4}$/i.test(val);
   
   class CommentForm extends Component {
   constructor(props) {
@@ -26,7 +24,7 @@ const validEmail = (val) => /^[A-Z0-9._%+-]+@[A-Z0-9.-]+\.[A-Z]{2,4}$/i.test(val
 
     };
     this.toggleModal = this.toggleModal.bind(this);
-    this.handleLogin = this.handleLogin.bind(this);
+    this.handleSubmit = this.handleSubmit.bind(this);
 
 
   }
@@ -36,11 +34,15 @@ const validEmail = (val) => /^[A-Z0-9._%+-]+@[A-Z0-9.-]+\.[A-Z]{2,4}$/i.test(val
       isModalOpen: !this.state.isModalOpen
     });
   }
-  handleLogin(event) {
+  handleSubmit(values) {
+
     this.toggleModal();
-    alert("Username: " + this.username.value + " Password: " + this.password.value
-        + " Remember: " + this.remember.checked);
-    event.preventDefault();
+    // console.log('Current State is: ' + JSON.stringify(values));
+    // alert('Current State is: ' + JSON.stringify(values));
+
+    this.props.addComment(this.props.dishId, values.rating, values.author, values.comment);
+
+
 
 }
 
@@ -58,15 +60,14 @@ const validEmail = (val) => /^[A-Z0-9._%+-]+@[A-Z0-9.-]+\.[A-Z]{2,4}$/i.test(val
         <Modal isOpen={this.state.isModalOpen} toggle={this.toggleModal}>
                     <ModalHeader toggle={this.toggleModal}>Submit Comment</ModalHeader>
                     <ModalBody>
-                    <Form onSubmit={this.handleSubmit}>
 
                       <LocalForm onSubmit={(values) => this.handleSubmit(values)}>
                       
                       <Row className="form-group">
                         <Col>
-                          <Label htmlFor="firstname" md={2}>Rating </Label>
+                          <Label htmlFor="rating" md={2}>Rating </Label>
 
-                            <Control.select model=".contactType" name="contactType"
+                            <Control.select model=".rating" name="Rating"
                                 className="form-control">
                                 <option>5</option>
                                 <option>4</option>
@@ -82,9 +83,9 @@ const validEmail = (val) => /^[A-Z0-9._%+-]+@[A-Z0-9.-]+\.[A-Z]{2,4}$/i.test(val
 
                       <Row className="form-group">
                         <Col>
-                        <Label htmlFor="firstname" md={4}>Your Name</Label>
+                        <Label htmlFor="author" md={4}>Your Name</Label>
                               
-                              <Control.text model=".firstname" id="firstname" name="firstname"
+                              <Control.text model=".author" id="author" name="author"
                                   placeholder="First Name"
                                   className="form-control"
                                   validators={{
@@ -93,7 +94,7 @@ const validEmail = (val) => /^[A-Z0-9._%+-]+@[A-Z0-9.-]+\.[A-Z]{2,4}$/i.test(val
                                   />
                               <Errors
                                   className="text-danger"
-                                  model=".firstname"
+                                  model=".author"
                                   show="touched"
                                   messages={{
                                       required: 'Required',
@@ -107,9 +108,9 @@ const validEmail = (val) => /^[A-Z0-9._%+-]+@[A-Z0-9.-]+\.[A-Z]{2,4}$/i.test(val
                           </Row>
                           <Row className="form-group">
                                 <Col>
-                                <Label htmlFor="message" md={2}>Comment</Label>
+                                <Label htmlFor="comment" md={2}>Comment</Label>
 
-                                <Control.textarea model=".message" id="message" name="message"
+                                <Control.textarea model=".comment" id="comment" name="comment"
                                     rows="6"
                                     className="form-control" />
                                 
@@ -129,7 +130,6 @@ const validEmail = (val) => /^[A-Z0-9._%+-]+@[A-Z0-9.-]+\.[A-Z]{2,4}$/i.test(val
                           </Row>
                       </LocalForm>
 
-                      </Form>
                     </ModalBody>
                 </Modal>
       </div>
@@ -154,7 +154,8 @@ const validEmail = (val) => /^[A-Z0-9._%+-]+@[A-Z0-9.-]+\.[A-Z]{2,4}$/i.test(val
               <div></div>
             )
       }
-    function RenderComments({comments}){
+    function RenderComments({comments, addComment, dishId}) {
+
       return(
         <div>
           <div> <h4> Comments </h4> </div>
@@ -175,7 +176,7 @@ const validEmail = (val) => /^[A-Z0-9._%+-]+@[A-Z0-9.-]+\.[A-Z]{2,4}$/i.test(val
            )
           
           }
-          <CommentForm />
+          <CommentForm dishId={dishId} addComment={addComment} />
         </div>
       )
     }
@@ -200,7 +201,10 @@ const validEmail = (val) => /^[A-Z0-9._%+-]+@[A-Z0-9.-]+\.[A-Z]{2,4}$/i.test(val
                     <RenderDish dish={props.dish} />
                 </div>
                 <div className="col-12 col-md-5 m-1">
-                    <RenderComments comments={props.comments} />
+                <RenderComments comments={props.comments}
+                  addComment={props.addComment}
+                  dishId={props.dish.id}
+                />
                     
                 </div>
             </div>
