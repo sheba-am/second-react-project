@@ -7,13 +7,14 @@ import { Component } from 'react';
 import { Button, Modal, ModalHeader, ModalBody,
  Label } from 'reactstrap';
 import { Control, LocalForm, Errors } from 'react-redux-form';
+import { Loading } from './LoadingComponent';
 
 const required = (val) => val && val.length;
 const maxLength = (len) => (val) => !(val) || (val.length <= len);
 const minLength = (len) => (val) => val && (val.length >= len);
-const isNumber = (val) => !isNaN(Number(val));
-  
-  class CommentForm extends Component {
+
+
+class CommentForm extends Component {
   constructor(props) {
     super(props);
 
@@ -136,9 +137,10 @@ const isNumber = (val) => !isNaN(Number(val));
       )
 
   }
-}
 
-    function RenderDish({dish}) {
+
+}
+function RenderDish({dish}) {
         if (dish != null)
           return(
             <Card>
@@ -182,6 +184,25 @@ const isNumber = (val) => !isNaN(Number(val));
     }
 
     const DishDetail = (props) => {
+      if (props.isLoading) {
+        return(
+            <div className="container">
+                <div className="row">            
+                    <Loading />
+                </div>
+            </div>
+        );
+    }
+    else if (props.errMess) {
+        return(
+            <div className="container">
+                <div className="row">            
+                    <h4>{props.errMess}</h4>
+                </div>
+            </div>
+        );
+    }
+    else if (props.dish != null) 
 
         return (
           <div className="container">
