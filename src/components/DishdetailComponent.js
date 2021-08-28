@@ -1,3 +1,4 @@
+import { baseUrl } from '../shared/baseUrl';
 
 import React from 'react';
 import { Card, CardImg, CardText, CardBody,
@@ -144,7 +145,7 @@ function RenderDish({dish}) {
         if (dish != null)
           return(
             <Card>
-              <CardImg top src={dish.image} alt={dish.name} />
+              <CardImg top src={baseUrl + dish.image} alt={dish.name} />
               <CardBody>
                 <CardTitle> {dish.name} </CardTitle>
                 <CardText> {dish.description} </CardText>
