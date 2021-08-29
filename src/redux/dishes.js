@@ -1,12 +1,3 @@
-//import { DISHES } from '../shared/dishes';
-
-// export const Dishes = (state = DISHES, action) => {
-//     switch (action.type) {
-//         default:
-//           return state;
-//       }
-// };
-
 import * as ActionTypes from './ActionTypes';
 
 export const Dishes = (state = { isLoading: true,

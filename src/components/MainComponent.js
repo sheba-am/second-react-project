@@ -14,7 +14,7 @@ import { LEADERS } from '../shared/leaders';
 import { Switch, Route, Redirect, withRouter } from 'react-router-dom'
 import { connect } from 'react-redux';
 import {actions} from 'react-redux-form';
-import { postComment, fetchDishes, fetchComments, fetchPromos } from '../redux/ActionCreators';
+import { postComment, fetchDishes, fetchComments, fetchPromos, fetchLeaders } from '../redux/ActionCreators';
 import { TransitionGroup, CSSTransition } from 'react-transition-group';
 
 
@@ -22,6 +22,7 @@ import { TransitionGroup, CSSTransition } from 'react-transition-group';
 const mapDispatchToProps = dispatch => ({
   postComment: (dishId, rating, author, comment) => dispatch(postComment(dishId, rating, author, comment)),
   fetchDishes: () => { dispatch(fetchDishes())},
+  fetchLeaders: () => {dispatch(fetchLeaders())},
   resetFeedbackForm: () => { dispatch(actions.reset('feedback'))},
   fetchComments: () => dispatch(fetchComments()),
   fetchPromos: () => dispatch(fetchPromos())
@@ -53,6 +54,7 @@ class Main extends Component {
 
   componentDidMount() {
     this.props.fetchDishes();
+    this.props.fetchLeaders();
     this.props.fetchComments();
     this.props.fetchPromos();
   }
@@ -65,10 +67,12 @@ class Main extends Component {
         dish={this.props.dishes.dishes.filter((dish) => dish.featured)[0]}
         dishesLoading={this.props.dishes.isLoading}
         dishErrMess={this.props.dishes.errMess}
+        leader={this.props.leaders.leaders.filter((leader) => leader.featured)[0]}
+        leadersLoading={this.props.leaders.isLoading}
+        leadersErrMess={this.props.leaders.errMess}
         promotion={this.props.promotions.promotions.filter((promo) => promo.featured)[0]}
         promoLoading={this.props.promotions.isLoading}
         promoErrMess={this.props.promotions.errMess}
-        leader={this.props.leaders.filter((leader) => leader.featured)[0]}
     />
       );
     }

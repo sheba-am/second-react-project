@@ -1,3 +1,4 @@
+import { baseUrl } from '../shared/baseUrl';
 import React from 'react';
 import { Breadcrumb, BreadcrumbItem, Card, CardBody, CardHeader, Container, Media } from 'reactstrap';
 import { Link } from 'react-router-dom';
@@ -9,7 +10,7 @@ function RenderLeader({leader}){
         <Media className="container"  >
             <Media className="row"  >
                 <Media   className="col-3" >
-                    <Media  object src={leader.image} alt={leader.name} />
+                    <Media  object src={baseUrl + leader.image} alt={leader.name} />
                 </Media>
                 <Media  className='col-9' >
                     <Media heading >
@@ -28,9 +29,8 @@ function RenderLeader({leader}){
 
 function About(props) {
 
-    const leaders = props.leaders.map((leader) => {
+    const leaders = props.leaders.leaders.map((leader) => {
         return (
-            // <p>Leader {leader.name}</p>
             <RenderLeader leader={leader} />
         );
     });
@@ -92,7 +92,6 @@ function About(props) {
                 <div>
                     <Media list>
                         {leaders}
-                        <RenderLeader leader={LEADERS[0]} />
                     </Media>
                 </div>
             </div>
