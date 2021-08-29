@@ -176,15 +176,17 @@ function RenderDish({dish}) {
           {
           comments.map((eachComment)=>
           (
-            <div>
-              {eachComment.comment} 
-              <p>
-                --{eachComment.author}
-                &nbsp;
-                {new Intl.DateTimeFormat('en-US',
-                 { year: 'numeric', month: 'short', day: '2-digit'}).format(new Date(Date.parse(eachComment.date)))} 
-              </p>
-            </div>
+            <Fade in>
+              <li>
+                {eachComment.comment} 
+                <p>
+                  --{eachComment.author}
+                  &nbsp;
+                  {new Intl.DateTimeFormat('en-US',
+                  { year: 'numeric', month: 'short', day: '2-digit'}).format(new Date(Date.parse(eachComment.date)))} 
+                </p>
+              </li>
+            </Fade>
           )
           
          )
