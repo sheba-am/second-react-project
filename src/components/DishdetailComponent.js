@@ -42,7 +42,7 @@ class CommentForm extends Component {
 
     this.toggleModal();
     // console.log('Current State is: ' + JSON.stringify(values));
-    // alert('Current State is: ' + JSON.stringify(values));
+    alert('Current State is: ' + JSON.stringify(values));
 
     this.props.postComment(this.props.dishId, values.rating, values.author, values.comment);
 
@@ -173,18 +173,24 @@ function RenderDish({dish}) {
           <ul className="list-unstyled">
             
           <Stagger in>
-                        {comments.map((comment) => {
-                            return (
-                                <Fade in>
-                                <li key={comment.id}>
-                                <p>{comment.comment}</p>
-                                <p>-- {comment.author} ,
-                                 {new Intl.DateTimeFormat('en-US', { year: 'numeric', month: 'short', day: '2-digit'}).format(
-                                   new Date(Date.parse(comment.date)))}</p>
-                                </li>
-                                </Fade>
-                            );
-                        })}
+          {
+          comments.map((eachComment)=>
+          (
+            <div>
+              {eachComment.comment} 
+              <p>
+                --{eachComment.author}
+                &nbsp;
+                {new Intl.DateTimeFormat('en-US',
+                 { year: 'numeric', month: 'short', day: '2-digit'}).format(new Date(Date.parse(eachComment.date)))} 
+              </p>
+            </div>
+          )
+          
+         )
+        
+        }
+        <CommentForm dishId={dishId} postComment={postComment} />
           </Stagger>
           </ul>
         </div>
